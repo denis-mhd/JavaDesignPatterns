@@ -1,14 +1,11 @@
 package design.patterns;
 
-import design.paterns.singleton.example.PrinterExample;
+import design.patterns.builder.example.BankAccount;
+import design.patterns.singleton.example.PrinterExample;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Stack;
-import java.util.concurrent.ArrayBlockingQueue;
 
 public class Main {
 
@@ -27,7 +24,13 @@ public class Main {
                 //calling getMyPrinter() will check if we calling same instance of MyPrinter
                 PrinterExample.getMyPrinter();
             case "Builder":
-
+                BankAccount bankAccount = new BankAccount.Builder()
+                        .accountNumber(1234L)
+                        .withOwner("Uncle Scrooge")
+                        .atBranch("Somewhere")
+                        .openingBalance(100000000)
+                        .atRate(2)
+                        .build();
         }
 
     }
