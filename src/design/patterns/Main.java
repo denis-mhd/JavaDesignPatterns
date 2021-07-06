@@ -1,6 +1,9 @@
 package design.patterns;
 
+import design.patterns.abstractfactory.example.CarFactory;
+import design.patterns.abstractfactory.example.TruckFactory;
 import design.patterns.builder.example.BankAccount;
+import design.patterns.factorymethod.Factory;
 import design.patterns.singleton.example.PrinterExample;
 import design.patterns.strategy.example.AirPlane;
 import design.patterns.strategy.example.Car;
@@ -27,6 +30,7 @@ public class Main {
                 PrinterExample.print("I am your Printer!");
                 //calling getMyPrinter() will check if we calling same instance of MyPrinter
                 PrinterExample.getMyPrinter();
+                break;
 
             case "Builder":
                 BankAccount bankAccount = new BankAccount.Builder()
@@ -36,6 +40,7 @@ public class Main {
                         .openingBalance(100000000)
                         .atRate(2)
                         .build();
+                break;
 
             case "Strategy":
                 SlowSpeedImpl slow = new SlowSpeedImpl();
@@ -50,7 +55,24 @@ public class Main {
                 getVehicleInfo(ship);
                 getVehicleInfo(car);
                 getVehicleInfo(airPlane);
+                break;
 
+            case "Factory":
+                Factory factory = new Factory();
+                factory.produce("Luxury").info();
+                factory.produce("Sports").info();
+                factory.produce("Small").info();
+                break;
+
+            case "Abstract Factory":
+                TruckFactory truckFactory = new TruckFactory();
+                truckFactory.produce("Big").capacityInfo();
+                truckFactory.produce("Small").capacityInfo();
+                CarFactory carFactory = new CarFactory();
+                carFactory.produce("Luxury").info();
+                carFactory.produce("Sports").info();
+                carFactory.produce("Small").info();
+                break;
         }
 
     }
