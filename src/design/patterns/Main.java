@@ -1,15 +1,17 @@
 package design.patterns;
 
-import design.patterns.abstractfactory.example.CarFactory;
-import design.patterns.abstractfactory.example.TruckFactory;
-import design.patterns.builder.example.BankAccount;
-import design.patterns.factorymethod.Factory;
-import design.patterns.singleton.example.PrinterExample;
-import design.patterns.strategy.example.AirPlane;
-import design.patterns.strategy.example.Car;
-import design.patterns.strategy.example.Ship;
-import design.patterns.strategy.example.Vehicle;
-import design.patterns.strategy.example.behavior.impl.*;
+
+import design.patterns.creational.abstractfactory.example.CarFactory;
+import design.patterns.creational.abstractfactory.example.TruckFactory;
+import design.patterns.creational.builder.example.BankAccount;
+import design.patterns.creational.factorymethod.Factory;
+import design.patterns.creational.prototype.Sheep;
+import design.patterns.creational.singleton.example.PrinterExample;
+import design.patterns.behavioral.strategy.example.AirPlane;
+import design.patterns.behavioral.strategy.example.Car;
+import design.patterns.behavioral.strategy.example.Ship;
+import design.patterns.behavioral.strategy.example.Vehicle;
+import design.patterns.behavioral.strategy.example.behavior.impl.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,7 +20,6 @@ import java.io.InputStreamReader;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
         String command = bufferedReader.readLine();
@@ -73,6 +74,19 @@ public class Main {
                 carFactory.produce("Sports").info();
                 carFactory.produce("Small").info();
                 break;
+
+            case "Prototype":
+                Sheep sheep = new Sheep();
+                sheep.setName("Dolly");
+                sheep.setColor("white");
+                Sheep dolly = null;
+                try {
+                    dolly = sheep.clone();
+                } catch (CloneNotSupportedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(sheep.getName() + sheep.getColor());
+                System.out.println(dolly.getName() + dolly.getColor());
         }
 
     }
@@ -82,5 +96,7 @@ public class Main {
         System.out.print(vehicle.getClass().getSimpleName());
         vehicle.getTravelBehavior().travel();
         vehicle.getSpeedBehavior().speed();
+
+
     }
 }
