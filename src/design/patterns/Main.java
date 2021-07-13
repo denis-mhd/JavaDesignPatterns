@@ -18,6 +18,10 @@ import design.patterns.behavioral.strategy.example.Car;
 import design.patterns.behavioral.strategy.example.Ship;
 import design.patterns.behavioral.strategy.example.Vehicle;
 import design.patterns.behavioral.strategy.example.behavior.impl.*;
+import design.patterns.structural.adapter.example.ChromeAdapter;
+import design.patterns.structural.adapter.example.ChromeDriver;
+import design.patterns.structural.adapter.example.Client;
+import design.patterns.structural.adapter.example.MozillaDriver;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -94,6 +98,7 @@ public class Main {
                 }
                 System.out.println(sheep.getName() + sheep.getColor());
                 System.out.println(Objects.requireNonNull(dolly).getName() + dolly.getColor());
+                break;
 
             case "Command":
                 TV tv = new TV();
@@ -102,6 +107,16 @@ public class Main {
                 remoteController.invoke("Up");
                 remoteController.invoke("Down");
                 remoteController.invoke("Off");
+                break;
+
+            case "Adapter":
+                MozillaDriver mozilla = new MozillaDriver();
+                ChromeDriver chromeDriver = new ChromeDriver();
+                ChromeAdapter chrome = new ChromeAdapter(chromeDriver);
+                Client client = new Client();
+                client.useBrowser(chrome);
+                client.useBrowser(mozilla);
+                break;
 
 
         }
