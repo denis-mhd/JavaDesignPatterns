@@ -1,6 +1,12 @@
 package design.patterns;
 
 
+import design.patterns.behavioral.command.example.command.TurnOff;
+import design.patterns.behavioral.command.example.command.TurnOn;
+import design.patterns.behavioral.command.example.command.VolumeDown;
+import design.patterns.behavioral.command.example.command.VolumeUp;
+import design.patterns.behavioral.command.example.invoker.Alexa;
+import design.patterns.behavioral.command.example.receiver.TV;
 import design.patterns.creational.abstractfactory.example.CarFactory;
 import design.patterns.creational.abstractfactory.example.TruckFactory;
 import design.patterns.creational.builder.example.BankAccount;
@@ -16,6 +22,7 @@ import design.patterns.behavioral.strategy.example.behavior.impl.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Objects;
 
 public class Main {
 
@@ -86,7 +93,17 @@ public class Main {
                     e.printStackTrace();
                 }
                 System.out.println(sheep.getName() + sheep.getColor());
-                System.out.println(dolly.getName() + dolly.getColor());
+                System.out.println(Objects.requireNonNull(dolly).getName() + dolly.getColor());
+
+            case "Command":
+                TV tv = new TV();
+                Alexa remoteController = new Alexa(new TurnOn(tv), new TurnOff(tv), new VolumeUp(tv), new VolumeDown(tv));
+                remoteController.invoke("On");
+                remoteController.invoke("Up");
+                remoteController.invoke("Down");
+                remoteController.invoke("Off");
+
+
         }
 
     }
